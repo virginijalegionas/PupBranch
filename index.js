@@ -10,6 +10,8 @@ var buttons = require('./Elements/Buttons');
 var links = require('./Elements/Links');
 var upDown = require('./Elements/UploadDownload');
 var alert = require('./Elements/Alerts');
+var modals = require('./Elements/Modals');
+
 // openNewPage = async function (pageUrl) {
 //   const browser = await puppeteer.launch(
 //     {
@@ -88,7 +90,7 @@ var alert = require('./Elements/Alerts');
 // await checkBox.unCheckNodecheckBox(page, "WorkSpace");
 
 
- await common.clickElementInMenu(page, "Alerts");
+ await common.clickElementInMenu(page, "Modal Dialogs");
 //  await wTables.clickAddButton(page);
 // await wTables.inputFieldValue(page, "First Name", "John");
 // await wTables.inputFieldValue(page, "Last Name", "John");
@@ -113,8 +115,11 @@ var alert = require('./Elements/Alerts');
 // console.log(`current tab count: ${tabCount}`);
 //await upDown.uploadFile(page, "sample1.jpeg");
 //await alert.clickButton(page, "Click Button to see alert");
-await alert.dismissAllert(page,"On button click, confirm box will appear");
-
+//await alert.dismissAllert(page,"On button click, confirm box will appear");
+await modals.clickSmallModalButton(page);
+await modals.getModalHeaderText(page);
+await modals.getModalBodyText(page);
+await modals.closeModalByX(page);
 await common.wait(5);
   await common.wait(5);
   
