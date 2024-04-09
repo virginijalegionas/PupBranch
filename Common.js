@@ -49,8 +49,7 @@ exports.clickConsent = async function (page) {
     await page.locator(xpath).click();
   }
 
-  exports.clickButton = async function (page, buttonSelector){
-    //await exports.scrollIntoObject(page, buttonSelector);  
+  exports.clickButton = async function (page, buttonSelector){    
     await page.locator(buttonSelector).click();  
   }
   exports.genRandom = async function (){
