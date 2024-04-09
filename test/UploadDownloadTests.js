@@ -1,4 +1,4 @@
-let pageUrl = "https://demoqa.com/";
+require('dotenv').config();
 const puppeteer = require('puppeteer');
 var upDown = require('../Elements/UploadDownload.js');
 var common = require('../Common.js');
@@ -20,7 +20,7 @@ describe('Upload Download Tests', function () {
   beforeEach(async function () {
     browser = await puppeteer.launch(browserOptions);
     page = await browser.newPage();
-    await page.goto(pageUrl);
+    await page.goto(process.env.pageLink);
   });
 
   it(`Upload File Test`, async function () {

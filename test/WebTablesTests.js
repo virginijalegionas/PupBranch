@@ -1,4 +1,4 @@
-let pageUrl = "https://demoqa.com/";
+require('dotenv').config();
 const puppeteer = require('puppeteer');
 var wtables = require('../Elements/WebTables.js');
 var common = require('../Common.js');
@@ -17,7 +17,7 @@ describe('Web Tables Tests', function () {
   beforeEach(async function () {
     browser = await puppeteer.launch(browserOptions);
     page = await browser.newPage();
-    await page.goto(pageUrl);
+    await page.goto(process.env.pageLink);
   });
 
   it(`Add New Record into Table Test`, async function () {

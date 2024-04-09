@@ -1,4 +1,4 @@
-let pageUrl = "https://demoqa.com/";
+require('dotenv').config();
 const puppeteer = require('puppeteer');
 var links = require('../Elements/Links.js');
 var common = require('../Common.js');
@@ -17,7 +17,7 @@ describe('Link Tests', function () {
   beforeEach(async function () {
     browser = await puppeteer.launch(browserOptions);
     page = await browser.newPage();
-    await page.goto(pageUrl);
+    await page.goto(process.env.pageLink);
   });
 
   it(`Created Link Test`, async function () {
