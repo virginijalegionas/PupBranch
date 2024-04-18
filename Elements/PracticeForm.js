@@ -1,5 +1,6 @@
 var modals = require('../Elements/Modals.js');
 var textBox = require('../Elements/TextBox.js');
+var upDown = require('../Elements/UploadDownload.js');
 
 exports.inputText = async function (page, textBoxName, textBoxValue) {
   await textBox.inputTextBox(page, textBoxName, textBoxValue);
@@ -15,10 +16,30 @@ exports.inputLastName = async function (page, value) {
   await page.locator(selector).fill(value);
 }
 
-exports.inputDateOfBirth = async function (page, value) {
-  let selector = `#dateOfBirthInput`;
-  await page.locator(selector).fill(value);
+exports.choosePicture = async function (page, fileName) {
+  await upDown.uploadFile(page, fileName);
 }
+
+exports.selectDateOfBirth = async function (page, yearValue, monthValue, dayValue) {
+  const calendar = await page.$("#dateOfBirthInput");
+  await calendar.click();
+
+  const year = await page.$(".react-datepicker__year-select");
+  await year.select(yearValue);
+
+  //month text and value are different, select option chooses by value. first need to identify value by text
+  let monthXpath = `xpath=//option[contains(text(),"${monthValue}")]`;
+  let selectorMonthValue = await page.$eval(monthXpath, n => n.getAttribute("value"));
+  const month = await page.$(".react-datepicker__month-select");
+  await month.select(selectorMonthValue);
+
+  let dayXpath = `xpath=//div[not(contains(@class, 'outside-month')) and text()='${dayValue}' ]`;
+  const day = await page.$(dayXpath);
+  await day.click();
+}
+
+
+
 
 exports.selectGender = async function (page, value) {
   const mgender = await page.$(`div > input[value="${value}"]`);
@@ -63,9 +84,9 @@ exports.closeResultsForm = async function (page) {
   await modals.closeLargeModalByCloseButton(page);
 }
 
-exports.getFormData = async function (page) {  
-  var tableResults = new Array();  
-  
+exports.getFormData = async function (page) {
+  var tableResults = new Array();
+
   var rowsElement = await page.$$('xpath=//table/tbody/tr');
   var labelElement = await page.$$('xpath=//table/tbody/tr[1]');
   var valueElement = await page.$$('xpath=//table/tbody/tr[2]');
@@ -73,9 +94,9 @@ exports.getFormData = async function (page) {
   for (let element in rowsElement) {
     var rowsLabel = await rowsElement[element].$$eval('td:first-child', nodes => nodes.map(n => n.innerText));
     var rowsValue = await rowsElement[element].$$eval('td:last-child', nodes => nodes.map(n => n.innerText));
-    
+
     tableResults[rowsLabel] = rowsValue;
-  
+
   }
   // for (let rr in tableResults) {
   //     for (const [key, value] of Object.entries(tableResults[rr])) {

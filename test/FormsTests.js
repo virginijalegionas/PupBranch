@@ -41,11 +41,16 @@ describe('Forms Tests', function () {
     await forms.inputText(page, "Email", email);
     await forms.selectGender(page, gender);
     await forms.inputText(page, "Mobile", mobile);
-    //await forms.inputDateOfBirth(page, "12/12/2002");
+    let year = "2020";
+    let month = "August";
+    let day = "12"
+    await forms.selectDateOfBirth(page, year, month, day);
     await forms.selectSubjects(page, subject1);
     await forms.selectSubjects(page, subject2);
     await forms.selectHobbies(page, hobby1);
     await forms.selectHobbies(page, hobby2);
+    let fileName = "sample1.jpeg";
+    await forms.choosePicture(page, fileName);
     await forms.inputText(page, "Current Address", currAddress);
     await forms.selectState(page, state);
     await forms.selectCity(page, city);
@@ -57,10 +62,11 @@ describe('Forms Tests', function () {
     expect(results["Student Email"]).contain(email);
     expect(results["Gender"]).contain(gender);
     expect(results["Mobile"]).contain(mobile);
-    //expect(results["Date of Birth"]).contain("16 April,2024");
+    let expectedDateValue = `${day} ${month},${year}`;
+    expect(results["Date of Birth"]).contain(expectedDateValue);
     expect(results["Subjects"]).contain(`${subject1}, ${subject2}`);
     expect(results["Hobbies"]).contain(`${hobby1}, ${hobby2}`);
-    //expect(results["Pictue"]).contain("");
+    expect(results["Picture"]).contain(fileName);
     expect(results["Address"]).contain(currAddress);
     expect(results["State and City"]).contain(`${state} ${city}`);
 
