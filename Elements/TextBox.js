@@ -21,9 +21,9 @@ exports.getTextBoxResults = async function (page) {
 exports.clickSubmit = async function (page) {
   const targetElement = await page.$('#submit');
   // Scrolling page down
-   await page.evaluate(() => {
-     window.scrollTo(0, document.body.scrollHeight);
-   });     
+  await page.evaluate(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  });
   await targetElement.click();
 }
 

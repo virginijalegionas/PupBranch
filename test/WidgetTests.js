@@ -49,6 +49,62 @@ describe('Widget Tests', function () {
 
   });
 
+  it(`Tabs Test`, async function () {
+    await common.clickBlockInHomePage(page, "Widgets");
+    await common.scrollToBottom(page);
+    await common.clickElementInMenu(page, "Tabs");
+    await common.scrollToTop(page);
+    await widgets.OpenTab(page, "Origin");
+    let originTabText = await widgets.getTabText(page, "Origin");
+    let expectedOriginTabText = "The standard chunk of Lorem Ipsum used since the 1500s";
+    expect(originTabText).to.contain(expectedOriginTabText);
+
+  });
+
+  it(`Select Menu Test`, async function () {
+    await common.clickBlockInHomePage(page, "Widgets");
+    await common.scrollToBottom(page);
+    await common.clickElementInMenu(page, "Select Menu");
+
+    // let withGroupValue = "Group 1, option 2";
+    // await widgets.selectWithGroupValue(page, withGroupValue);
+    // let selectedWithGroupValue = await widgets.getWithGroupValue(page);
+    // expect(withGroupValue).to.eql(selectedWithGroupValue);
+
+    // let oneValue = "Mrs.";
+    // await widgets.selectOneValue(page, oneValue);
+    // let selectedOneValue = await widgets.getSelectOneValue(page);
+    // expect(oneValue).to.eql(selectedOneValue);
+
+    // let oldStyleValue = "Voilet";
+    // await widgets.selectFromOldStyleMenu(page, oldStyleValue);
+    // let selectedOldStyleValue =  await widgets.getOldSelectMenuSelectedValues(page);
+    //  expect(oldStyleValue).to.eql(selectedOldStyleValue); 
+
+    // let multiSelectValue1 = "Green";
+    // let multiSelectValue2 = "Blue";    
+    //  await widgets.selectMultiselectDropDown(page, multiSelectValue1);
+    //  await widgets.selectMultiselectDropDown(page, multiSelectValue2);
+    // let selectedMultiSelectValue = await widgets.getMultiselectDropDownValues(page);
+    // expect(selectedMultiSelectValue).contain(multiSelectValue1); 
+    // expect(selectedMultiSelectValue).contain(multiSelectValue2); 
+
+    common.scrollToBottom(page);
+    let carsSelect = ["Volvo", "Audi"];
+    await widgets.selectStandardMultiSelect(page, carsSelect);
+    await widgets.getStandardMultiSelectValues(page);
+
+
+
+
+
+    //await widgets.getSatndardMultiSelectValues(page);
+    // let await widgets.getMultiselectDropDownValues(page);
+
+
+  });
+
+
 
   afterEach(async function () {
     await browser.close();
