@@ -98,6 +98,7 @@ exports.getFormData = async function (page) {
     tableResults[rowsLabel] = rowsValue;
 
   }
+  //let it be commented, in case there will be time I need it to be printed in screen
   // for (let rr in tableResults) {
   //     for (const [key, value] of Object.entries(tableResults[rr])) {
   //         console.log(key, value);
