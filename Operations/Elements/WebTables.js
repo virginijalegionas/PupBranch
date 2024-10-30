@@ -127,9 +127,8 @@ exports.getTableData = async function (page) {
     var tableResults = new Array();
     const headerHandle = await page.$('div.rt-thead.-header');
     tableHeader = await headerHandle.$$eval('div.rt-resizable-header-content', nodes => nodes.map(n => n.innerText));
-    let hl = tableHeader.length;
-    var rowHandle = new Array();
-    rowHandle = await page.$$('div.rt-tr-group');
+    let hl = tableHeader.length;    
+    var rowHandle = await page.$$('div.rt-tr-group');
     for (let column in rowHandle) {
         var rowResults = await rowHandle[column].$$eval('div.rt-td', nodes => nodes.map(n => n.innerText));
         var rowData = new Object();
