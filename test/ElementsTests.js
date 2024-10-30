@@ -6,9 +6,14 @@ var textBox = require('../Operations/Elements/TextBox.js');
 var radio = require('../Operations/Elements/RadioButton.js');
 var buttons = require('../Operations/Elements/Buttons.js');
 var upDown = require('../Operations/Elements/UploadDownload.js');
+var links = require('../Operations/Elements/Links.js');
 var common = require('../Common.js');
 var baseOperations = require('../BaseOperations.js');
 const expect = require('expect.js');
+const fs = require('fs');
+const uploadFileName = "Sample1.txt";
+const downloadFileName = "sampleFile.jpeg";
+const downloadDirectory = process.env.USERPROFILE+"\\Downloads";
 
 describe('Elements Tests', function () {
     let page;
@@ -232,19 +237,72 @@ describe('Elements Tests', function () {
         const expectedPath = `C:\\fakepath\\${uploadFileName}`;
         let uploadedFilePath = await upDown.getUploadedFilePath(page);
         expect(uploadedFilePath).to.equal(`${expectedPath}`);
-
-        const fs = require('fs');
-        let fileExists = fs.existsSync(`${downloadDirectory}${downloadFileName}`);
+        
+        let fileExists = fs.existsSync(`${downloadDirectory}\\${downloadFileName}`);
         //clear file in case it already exists in the folder
         if (fileExists == true) {
-            fs.unlinkSync(`${downloadDirectory}${downloadFileName}`);
+            fs.unlinkSync(`${downloadDirectory}\\${downloadFileName}`);
         }
         //STEP2: download file
         await upDown.clickDowloadButton(page);
         await common.wait(2);
-        fileExists = fs.existsSync(`${downloadDirectory}${downloadFileName}`);
+        fileExists = fs.existsSync(`${downloadDirectory}\\${downloadFileName}`);
         expect(fileExists).to.equal(true);
-        fs.unlinkSync(`${downloadDirectory}${downloadFileName}`);
+        fs.unlinkSync(`${downloadDirectory}\\${downloadFileName}`);
+    });
+
+    it(`Links Test`, async function () {
+        //STEP1: click link - Created
+        let expectedResponseMessage = 'Link has responded with staus 201 and status text Created';
+        await baseOperations.clickBlockInHomePage(page, "Elements");
+        await baseOperations.clickElementInMenu(page, "Links");
+        await links.clickLinkCreated(page);
+        await common.wait(1);
+        let responseMessage = await links.getLinkResponseMessage(page);
+        expect(expectedResponseMessage).to.equal(`${responseMessage}`);
+
+        //STEP2: click link - No Content
+        expectedResponseMessage = 'Link has responded with staus 204 and status text No Content';
+        await links.clickLinkNoContent(page);
+        await common.wait(1);
+        responseMessage = await links.getLinkResponseMessage(page);
+        expect(responseMessage).to.equal(`${expectedResponseMessage}`);
+
+        //STEP3: click link - Moved
+        expectedResponseMessage = 'Link has responded with staus 301 and status text Moved Permanently';
+        await links.clickLinkMoved(page);
+        await common.wait(1);
+        responseMessage = await links.getLinkResponseMessage(page);
+        expect(responseMessage).to.equal(`${expectedResponseMessage}`);
+
+        //STEP4: click link - Bad Request
+        expectedResponseMessage = 'Link has responded with staus 400 and status text Bad Request';
+        await links.clickLinkBadRequest(page);
+        await common.wait(1);
+        responseMessage = await links.getLinkResponseMessage(page);
+        expect(responseMessage).to.equal(`${expectedResponseMessage}`);
+
+        //STEP5: click link - Unauthorized
+        expectedResponseMessage = 'Link has responded with staus 401 and status text Unauthorized';
+        await links.clickLinkUnauthorized(page);
+        await common.wait(1);
+        responseMessage = await links.getLinkResponseMessage(page);
+        expect(responseMessage).to.equal(`${expectedResponseMessage}`);
+
+        //STEP6: click link - Forbidden
+        await baseOperations.scrollToBottom(page);
+        expectedResponseMessage = 'Link has responded with staus 403 and status text Forbidden';
+        await links.clickLinkForbidden(page);
+        await common.wait(1);
+        responseMessage = await links.getLinkResponseMessage(page);
+        expect(responseMessage).to.equal(`${expectedResponseMessage}`);
+
+        //STEP7: click link - Not found
+        expectedResponseMessage = 'Link has responded with staus 404 and status text Not Found';
+        await links.clickLinkNotFound(page);
+        await common.wait(1);
+        responseMessage = await links.getLinkResponseMessage(page);
+        expect(responseMessage).to.equal(`${expectedResponseMessage}`);
     });
 
     afterEach(async function () {
