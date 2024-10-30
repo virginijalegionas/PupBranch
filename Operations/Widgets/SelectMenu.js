@@ -54,10 +54,8 @@ exports.selectMultiselectDropDown = async function (page, value) {
 exports.getMultiselectDropDownValues = async function (page) {
     let xpath = `xpath=//div/p/b[contains(text(), 'Multiselect drop down')]/parent::p/parent::div//div[@class = ' css-2b097c-container']`;
     let resultsElement = await page.$(xpath);
-    results = await resultsElement.$$eval('.css-12jo7m5', nodes => nodes.map(n => n.innerText));
-    console.log(`results: ${results.type}`);
+    results = await resultsElement.$$eval('.css-12jo7m5', nodes => nodes.map(n => n.innerText));    
     return results;
-
 }
 
 exports.selectStandardMultiSelect = async function (page, selectValue) {

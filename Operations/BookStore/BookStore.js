@@ -28,9 +28,8 @@ exports.getBookData = async function (page) {
     var bookData = new Array();
     const headerHandle = await page.$(`.rt-tr`);
     bookHeader = await headerHandle.$$eval('.rt-resizable-header-content', nodes => nodes.map(n => n.innerText));
-    let hl = bookHeader.length;
-    var rowHandle = new Array();
-    rowHandle = await page.$$('div.rt-tr-group');
+    let hl = bookHeader.length;    
+    var rowHandle = await page.$$('div.rt-tr-group');
     for (let column in rowHandle) {
         var rowResults = await rowHandle[column].$$eval('div.rt-td', nodes => nodes.map(n => n.innerText));
         var rowData = new Object();
