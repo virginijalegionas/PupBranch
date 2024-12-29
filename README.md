@@ -21,17 +21,20 @@ The aim of this project: learn web automation using puppeteer node.js
   
 **Forms**
 - Fill the form, submit it, validate results
-*Widgets*
+
+**Widgets**
 - Tabs
 - Select Menu
 - Accordian
 - Progress Bar
-*Other Elements*
+  
+**Other Elements**
 - Alerts
 - Frames
 - Nested Frames
 - Modal Dialogs
-*Book Store*
+
+**Book Store**
 - Navigate through Book Store pages
 - Scrap data into the file
 - Search a book
