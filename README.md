@@ -1,10 +1,10 @@
-## pupBranch
-The aim of this project: keep up with the selenium web automation skills and improve them.
+## PupBranch
+The aim of this project: learn web automation using puppeteer node.js
 
 **Project Info:**
 - automation tests created for this demo page: https://demoqa.com/
-- selenium was used for automation
-- coded with C#
+- puppeteer was used for automation
+- coded with node.js (javaScript)
 - xpaths handled with chroPath
 - no .runSettings required for this project
 
@@ -13,24 +13,23 @@ The aim of this project: keep up with the selenium web automation skills and imp
 - Text Box
 - Check Box
 - Radio Button
-- Buttons
 - Web Tables
-- Dynamic Properties: visible, color changed, etc.
+- Buttons
 - Upload, Download
-- Navigation Menu
+- Links
 *Forms*
 - Fill the form, submit it, validate results
 *Widgets*
 - Tabs
 - Select Menu
 - Accordian
-- Data Picker
-- Slider
-- Tool Tips
 - Progress Bar
 *Other Elements*
 - Alerts
 - Frames
 - Nested Frames
 - Modal Dialogs
-- Browser Windows
+*Book Store*
+- Navigate through Book Store pages
+- Scrap data into the file
+- Search a book
