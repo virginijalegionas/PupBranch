@@ -9,6 +9,7 @@ The aim of this project: learn web automation using puppeteer node.js
 - no .runSettings required for this project
 
 **Automated tests validate these situations:**
+
 **Elements**
 - Text Box
 - Check Box
