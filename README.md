@@ -18,7 +18,8 @@ The aim of this project: learn web automation using puppeteer node.js
 - Buttons
 - Upload, Download
 - Links
-*Forms*
+  
+**Forms**
 - Fill the form, submit it, validate results
 *Widgets*
 - Tabs
